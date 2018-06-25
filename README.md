@@ -1,48 +1,16 @@
-# Hello Phoenix
+# My Nerves Gadget
 
-This example demonstrates a basic poncho project for deploying a [Phoenix
-Framework]-based application to a Nerves device. A "poncho project" is similar
-to an umbrella project except that it's actually multiple separate-but-related
-Elixir apps that use `path` dependencies instead of `in_umbrella` dependencies.
-You can read more about the motivations behind this concept on the
-embedded-elixir blog post about [Poncho Projects].
+This is based on the Hello Phoenix project from the [nerves_examples](https://github.com/nerves-project/nerves_examples). My goal is to have a web interface that I can use to configure some strip LED lights. There is a Makefile in the project to make things easier to build (so I don't have to remember all the commands and their syntax).
 
-## Hardware
+## Getting Started
 
-This example serves a Phoenix-based web page over the network using the target's
-Ethernet interface. By default, it will use DHCP to get an IP address on its
-`eth0` interface. For more information about how to configure the network
-settings for your environment, including WiFi settings, see the `hello_network`
-example.
+1. Rename and then edit the ```.env```. Put your network configuration information in there as well as what target you intend to deploy to.
+2. ```make; make burn``` will build and then burn the image to an SD card. After that, and changes you want to make can be pushed to the device with ```make push```
+3. I have a strip of 20 NeoPixels (WS2812). You will want to connect them similarly to [this post](https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/).
+4. Start up the Pi and watch the LEDs change.
 
-## How to Use this Repository
+## Problems
 
-1.  Connect your target hardware to your network as described above
-2.  Change to the `firmware` app directory:
-3.  Specify your target with the `MIX_TARGET` environment variable
-4.  Get dependencies with `mix deps.get`
-5.  Create firmware with `mix firmware`
-6.  Burn firmware to an SD card with `mix firmware.burn`
-7.  Connect a monitor to the HDMI port on the board
-8.  Insert the SD card into your target board and power it on
-9.  After it finishes booting (about 5 seconds), check the console on the
-    monitor for messages about an IP address being assigned.
-10. Open a browser window on your host computer to `http://<IP address>/`
+LEDS: They don't light up right now...which is the part I'm working on. That's first. Then I'll figure out the next problem, which is...
 
-``` bash
-cd firmware
-export MIX_TARGET=rpi3
-mix deps.get
-mix firmware
-mix firmware.burn
-```
-
-[Phoenix Framework]: http://www.phoenixframework.org/
-[Poncho Projects]: http://embedded-elixir.com/post/2017-05-19-poncho-projects/
-
-## Learn More
-
-  * Official docs: https://hexdocs.pm/nerves/getting-started.html
-  * Official website: http://www.nerves-project.org/
-  * Discussion Slack elixir-lang #nerves ([Invite](https://elixir-slackin.herokuapp.com/))
-  * Source: https://github.com/nerves-project/nerves
+Phoenix: For some reason there is a conflict when phoenix and the led project are both included in the firmware project. Phoenix has a problem booting up and I need to debug that.
