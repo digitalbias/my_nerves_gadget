@@ -1,0 +1,59 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}", name: "Nerves!" %></h2>
+  <p class="lead">An amazing embeded system that<br />can embed webframeworks into a small system.</p>
+  <p>This UI is powered by Phoenix.</p>
+</div>
+
+<div class="row marketing">
+  <div class="col-lg-6">
+    <h4>Phoneix Resources</h4>
+    <ul>
+      <li>
+        <a href="http://phoenixframework.org/docs/overview">Guides</a>
+      </li>
+      <li>
+        <a href="https://hexdocs.pm/phoenix">Docs</a>
+      </li>
+      <li>
+        <a href="https://github.com/phoenixframework/phoenix">Source</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="col-lg-6">
+    <h4>Nerves Resources</h4>
+    <ul>
+      <li>
+        <a href="https://nerves-project.org/">Nerves Homepage</a>
+      </li>
+      <li>
+        <a href="https://hexdocs.pm/nerves/getting-started.html">Getting Started w/Nerves</a>
+      </li>
+      <li>
+        <a href="https://hexdocs.pm/nerves/advanced-configuration.html#root-filesystem-overlays">Advanced Nerves configuration</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="row marketing">
+  <div class="col-lg-12">
+    <h4>For my next trick...</h4>
+    <p>I want to get some LEDs connected to this device and control them from here. Currently I have what I believe is a WS2812 (NeoPixel). There are 17 on the strip and I believe I can power them from the PI without any other external power source. Below are some resources to help get me started.</p>
+    <ul>
+      <li>
+        <a href="https://www.adafruit.com/product/1376?length=1">The NeoPixel strip lights</a>
+      </li>
+      <li>
+        <a href="https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/">A tutorial for getting them setup with more than 30 lights.</a>
+      </li>
+      <li>
+        <a href="https://core-electronics.com.au/tutorials/ws2812-addressable-leds-raspberry-pi-quickstart-guide.html">Another tutorial, uses Python code and but uses GPIO pins I expect to use.</a>
+      </li>
+      <li>
+        <a href="https://github.com/GregMefford/nerves_neopixel">A NeoPixel library for Nerves. Will be using this to control the lights.</a>
+      </li>
+      <li>
+        <a href="https://www.raspberrypi.org/forums/viewtopic.php?t=152843">It's also worthy to note that you can drive a small number of LEDs from the 5v pins.</a>
+      </li>
+  </div>
+</div>
