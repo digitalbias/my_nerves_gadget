@@ -56,7 +56,7 @@ defmodule Firmware.MixProject do
       {:nerves_init_gadget, "~> 0.4.0"},
       # {:leds, path: "../leds"},
       {:nerves_neopixel, "~> 0.3.2"},
-      {:ui, path: "../ui"}
+      # {:ui, path: "../ui"}
     ] ++ system(target)
   end
 

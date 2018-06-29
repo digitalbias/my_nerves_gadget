@@ -27,7 +27,7 @@ defmodule Firmware do
   alias Nerves.Neopixel
 
   @frame_delay Application.get_env(:leds, :frame_delay, 5)
-  @pixel_count Application.get_env(:leds, :pixel_count, 3)
+  @pixel_count Application.get_env(:leds, :pixel_count, 1)
   @gpio_pin Application.get_env(:leds, :gpio_pin, 18)
 
   def start_leds() do
@@ -37,9 +37,7 @@ defmodule Firmware do
     channel = 0
     intensity = 127
     data = [
-      {255, 0, 0},
-      {0, 255, 0},
-      {0, 0, 255},
+      {255, 0, 0}
     ]
     Neopixel.render(channel, {intensity, data})
   end
