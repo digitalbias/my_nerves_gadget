@@ -9,7 +9,8 @@ defmodule Firmware do
     import Supervisor.Spec, warn: false
     # Define workers and child supervisors to be supervised
     children = [
-      supervisor(Phoenix.PubSub.PG2, [Nerves.PubSub, [poolsize: 1]]),
+      # supervisor(Phoenix.PubSub.PG2, [Nerves.PubSub, [poolsize: 1]]),
+      worker(Leds, []),
       worker(Task, [fn -> start_network() end], restart: :transient)
     ]
 
@@ -21,24 +22,5 @@ defmodule Firmware do
 
   def start_network do
     Nerves.Network.setup(to_string(@interface))
-    start_leds()
-  end
-
-  alias Nerves.Neopixel
-
-  @frame_delay Application.get_env(:leds, :frame_delay, 5)
-  @pixel_count Application.get_env(:leds, :pixel_count, 1)
-  @gpio_pin Application.get_env(:leds, :gpio_pin, 18)
-
-  def start_leds() do
-    ch0_config = [pin: @gpio_pin, count: @pixel_count]
-    {:ok, pid} = Neopixel.start_link(ch0_config)
-
-    channel = 0
-    intensity = 127
-    data = [
-      {255, 0, 0}
-    ]
-    Neopixel.render(channel, {intensity, data})
   end
 end

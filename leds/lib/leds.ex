@@ -1,25 +1,30 @@
 defmodule Leds do
-  use Application
+  require Logger
 
-  # require Logger
-  alias Nerves.Neopixel
+  alias ElixirALE.GPIO
 
-  @frame_delay Application.get_env(:leds, :frame_delay, 5)
-  @pixel_count Application.get_env(:leds, :pixel_count, 3)
-  @gpio_pin Application.get_env(:leds, :gpio_pin, 18)
+  @output_pin Application.get_env(:leds, :output_pin, 18)
+  @blink_durration 500
+  @gpio_on 1
+  @gpio_off 0
 
-  def start(_type, _args) do
-    ch0_config = [pin: @gpio_pin, count: @pixel_count]
-    {:ok, pid} = Neopixel.start_link(ch0_config)
+  def start_link do
+    Logger.info("Starting pin #{@output_pin} as output")
+    {:ok, output_pid} = GPIO.start_link(@output_pin, :output)
+    spawn(fn -> toggle_pin_forever(output_pid) end)
+  end
 
-    channel = 0
-    intensity = 127
-    data = [
-      {255, 0, 0},
-      {0, 255, 0},
-      {0, 0, 255},
-    ]
-    Neopixel.render(channel, {intensity, data})
+  defp toggle_pin_forever(output_pid) do
+    Logger.debug("Turning pin #{@output_pin} ON")
+    GPIO.write(output_pid, @gpio_on)
+    # Process.sleep(@blink_durration)
+    :timer.sleep @blink_durration
+
+    Logger.debug("Turning pin #{@output_pin} OFF")
+    GPIO.write(output_pid, @gpio_off)
+    # Process.sleep(@blink_durration)
+    :timer.sleep @blink_durration
+
+    toggle_pin_forever(output_pid)
   end
 end
- 

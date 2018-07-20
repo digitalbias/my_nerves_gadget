@@ -7,7 +7,7 @@ defmodule Firmware.MixProject do
     [
       app: :firmware,
       version: "0.1.0",
-      elixir: "~> 1.4",
+      elixir: "~> 1.6",
       target: @target,
       archives: [nerves_bootstrap: "~> 1.0"],
       deps_path: "deps/#{@target}",
@@ -54,9 +54,9 @@ defmodule Firmware.MixProject do
       {:shoehorn, "~> 0.2"},
       {:nerves_runtime, "~> 0.4"},
       {:nerves_init_gadget, "~> 0.4.0"},
-      # {:leds, path: "../leds"},
-      {:nerves_neopixel, "~> 0.3.2"},
-      # {:ui, path: "../ui"}
+      {:leds, path: "../leds"},
+      # {:nerves_neopixel, "~> 0.3.2"},
+      {:ui, path: "../ui"}
     ] ++ system(target)
   end
 

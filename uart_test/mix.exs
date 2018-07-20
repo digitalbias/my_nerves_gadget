@@ -1,9 +1,9 @@
-defmodule Leds.Mixfile do
+defmodule UartTest.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :leds,
+      app: :uart_test,
       version: "0.0.1",
       elixir: "~> 1.4",
       deps: deps()
@@ -14,7 +14,8 @@ defmodule Leds.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Leds, []}, extra_applications: [:logger]]
+    # [mod: {UartTest, []}, extra_applications: []]
+    []
   end
 
   # Specifies your project dependencies.
@@ -22,7 +23,7 @@ defmodule Leds.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:elixir_ale, "~> 1.0"}
+      {:nerves_uart, "~> 1.2"}
     ]
   end
 end

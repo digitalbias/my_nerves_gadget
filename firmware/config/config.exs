@@ -9,8 +9,9 @@ use Mix.Config
 # to add files to the root filesystem or modify the firmware
 # archive.
 
-config :nerves, :firmware, rootfs_overlay: "rootfs_overlay"
-#   fwup_conf: "config/fwup.conf"
+config :nerves, :firmware, 
+  rootfs_overlay: "rootfs_overlay",
+  fwup_conf: "config/fwup.conf"
 
 config :logger, level: :debug
 
@@ -27,8 +28,8 @@ config :nerves_network, :default,
   ]
 
 # config :firmware, interface: :eth0
-config :firmware, interface: :wlan0
-# config :firmware, interface: :usb0
+# config :firmware, interface: :wlan0
+config :firmware, interface: :usb0
 
 config :ui, Ui.Endpoint,
   http: [port: 80],
@@ -43,7 +44,8 @@ config :ui, Ui.Endpoint,
 config :leds, Leds,
   frame_delay: 5,
   pixel_count: 3,
-  gpio_pin: 18
+  output_pin: 18,
+  input_pin: 20
 
 # Use shoehorn to start the main application. See the shoehorn
 # docs for separating out critical OTP applications such as those

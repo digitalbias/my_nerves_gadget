@@ -17,3 +17,5 @@ clean:
 
 rebuild: clean build
 
+screen:
+	screen /dev/tty.SLAB_USBtoUART 115200
