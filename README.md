@@ -9,8 +9,25 @@ This is based on the Hello Phoenix project from the [nerves_examples](https://gi
 3. I have a strip of 20 NeoPixels (WS2812). You will want to connect them similarly to [this post](https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/).
 4. Start up the Pi and watch the LEDs change.
 
-## Problems
 
-LEDS: They don't light up right now...which is the part I'm working on. That's first. Then I'll figure out the next problem, which is...
+## How To
 
-Phoenix: For some reason there is a conflict when phoenix and the led project are both included in the firmware project. Phoenix has a problem booting up and I need to debug that.
+### Circuit setup
+
+
+
+### Debugging
+
+I've found the best way to debug is via a USB to UART connection. I purchased two connectors off of Amazon. The connected the TXD and RXD pins to the PI. I connected TXD from the USB connector to pin 10 (GPIO 15) and the RXD from the USB to pin 8 (GPIO 14). 
+
+The to see what is going on I ran `screen /dev/tty.SLAB_USBtoUART 24000` on my mac and it connected. It feels a bit 1980ish, but `screen /dev/tty.SLAB_USBtoUART 115200` caused problems.
+
+From there I could see when there were issues. Some useful commands to run on the commandline were:
+
+`Application.started_applications` 
+
+and
+
+`RingLogger.tail`
+
+Both of those commands from IEx helped narrow down what was causing problems and let me know what possible solutions were.
