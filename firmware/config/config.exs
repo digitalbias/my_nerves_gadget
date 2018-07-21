@@ -13,8 +13,6 @@ config :nerves, :firmware,
   rootfs_overlay: "rootfs_overlay",
   fwup_conf: "config/fwup.conf"
 
-config :logger, level: :debug
-
 key_mgmt = System.get_env("NERVES_NETWORK_KEY_MGMT") || "WPA-PSK"
 
 config :nerves_network, :default,
@@ -63,10 +61,15 @@ config :nerves_firmware_ssh,
 # Allows for tailing of logs.
 config :logger, backends: [RingLogger]
 
+# Set the number of messages to hold in the circular buffer
+config :logger, RingLogger, max_size: 100
+
+config :logger, level: :info
+
 # Set a mdns domain and node_name to be able to remsh into the device.
 config :nerves_init_gadget,
-  node_name: :hello_phoenix,
-  mdns_domain: "hello_phoenix.local"
+  node_name: :mygadget,
+  mdns_domain: "mygadget.local"
 
 # for Devices that don't support usb gadget such as raspberry pi 1, 2, and 3.
 # address_method: :dhcp,

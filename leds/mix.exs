@@ -22,7 +22,8 @@ defmodule Leds.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:elixir_ale, "~> 1.0"}
+      {:elixir_ale, "~> 1.0"},
+      {:nerves_neopixel, "~> 0.3.2"}
     ]
   end
 end

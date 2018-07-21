@@ -1,17 +1,31 @@
 defmodule Leds do
+  use GenServer
   require Logger
 
   alias ElixirALE.GPIO
 
-  @output_pin Application.get_env(:leds, :output_pin, 18)
+  @output_pin 18
   @blink_durration 500
   @gpio_on 1
   @gpio_off 0
 
-  def start_link do
+  def init(args) do
+    {:ok, args}
+  end
+
+  def start(_type, _args) do
+    begin_blinking()
+  end
+
+  def start_link(_) do
+    begin_blinking()
+  end
+
+  def begin_blinking() do
     Logger.info("Starting pin #{@output_pin} as output")
     {:ok, output_pid} = GPIO.start_link(@output_pin, :output)
-    spawn(fn -> toggle_pin_forever(output_pid) end)
+    pid = spawn(fn -> toggle_pin_forever(output_pid) end)
+    {:ok, pid}
   end
 
   defp toggle_pin_forever(output_pid) do
